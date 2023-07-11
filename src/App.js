@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// import components--start
+import Username from "./components/username";
+import Register from "./components/register";
+import Password from "./components/password";
+import Recovery from "./components/recovery";
+import Profile from "./components/profile";
+import Reset from "./components/reset";
+import Pagenotfound from "./components/pagenotfound";
+import { AuthorizeUser, ProtectRoute } from "./middleware/auth";
+// import components--end
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <>
+  <BrowserRouter>
+   <Routes>
+     <Route path='/'element={<Username />} />
+     <Route path='/register'element={<Register />} />
+     <Route path='/password'element={<ProtectRoute><Password /></ProtectRoute>} />
+     <Route path='/recovery'element={<Recovery />} />
+     <Route path='/profile'element={<AuthorizeUser><Profile /></AuthorizeUser>} />
+     <Route path='/reset'element={<Reset />} />
+     <Route path='*'element={<Pagenotfound />} />
+   </Routes>
+  </BrowserRouter>
+  </>
 }
 
 export default App;
