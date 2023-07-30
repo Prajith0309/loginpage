@@ -54,6 +54,7 @@ export const registerUser = async(details) => {
         }
         return Promise.resolve(msg)
     }catch(error){
+        console.log(error)
         return Promise.reject({error})
     }
 };
